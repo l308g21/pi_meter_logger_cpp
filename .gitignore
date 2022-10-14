@@ -1,0 +1,5 @@
+deploy.conf
+db.conf
+*.gch
+*.o
+*.zip
