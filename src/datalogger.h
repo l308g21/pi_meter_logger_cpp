@@ -1,6 +1,6 @@
 #pragma once
 
-typedef unsigned long int pthread_t_t;
+
 class CDatabase;
 
 class CDatalogger
@@ -12,7 +12,7 @@ class CDatalogger
 
     public:
 
-        void set_db( CDatabase& db);
+        void set_db( CDatabase& _db);
         void set_period( const int seconds);
         void set_gpio(   const int gpio);
         void set_id  (   const int id);
@@ -31,6 +31,5 @@ class CDatalogger
         int             period;    
         int             gpio;
         unsigned int    pulse_count;
-        pthread_t_t*    p_thread_logger;
 
 };

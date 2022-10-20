@@ -5,7 +5,7 @@ REMOTE_LOCATION	= code/$(TARGET)
 
 
 CC     = g++
-CFLAGS = -g -Wall
+CFLAGS = -g -Wall -pthread
 
 SRC	= src/
 BLD = build/
@@ -23,7 +23,7 @@ $(BLD)db.o: $(SRC)db.cpp $(SRC)db.h
 	$(CC) $(CFLAGS) -o $@ -c $<
 
 app: $(SRC)main.cpp $(BLD)db.o $(BLD)datalogger.o
-	$(CC) $(CFLAGS) -lpigpio -o $(BIN)$(TARGET) $^
+	$(CC) $(CFLAGS) -o $(BIN)$(TARGET) $^
 
 
 

@@ -11,19 +11,15 @@
 
 
 
-void *write_data(void * _arg)
+void write_data(int _gpio, int _level, uint32_t _tick, void* _p_pulse_count)
 {
-    CDatalogger & logger = *(CDatalogger *) _arg;
-    while (true)
-    {
-        // sleep over the course of period length
-        // -> write pulse_count to db
-        sleep(logger.get_period());
-        
-        logger.log_period();
-    }
+    // only trigger on rising edge
+    if (_level != 1) return;
+
+    * (unsigned int*) _p_pulse_count += 1;
+
     // returning nullptr to inhibit warning
-    return nullptr;
+    return;
 }
 
 
@@ -40,10 +36,7 @@ CDatalogger::CDatalogger()
 
 CDatalogger::~CDatalogger()
 {
-    gpioStopThread(p_thread_logger);
-
     db              = nullptr;
-    p_thread_logger = nullptr;
     return;
 }
 
@@ -98,9 +91,16 @@ void CDatalogger::start_logging()
     //      write current value to db
     // remember to close thread if logger determinated
     
-    if (p_thread_logger != nullptr) return;
+    if (db == nullptr) return;
+    gpioSetAlertFuncEx(gpio, write_data, &pulse_count);
 
-    p_thread_logger = gpioStartThread(write_data, (void *) this );
+    while (true)
+    {
+        sleep(period);
+        log_period();
+    }
+
+    
     return;
 }
 
