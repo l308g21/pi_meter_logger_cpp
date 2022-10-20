@@ -1,2 +1,2 @@
-USER    ?= username
-MACHINE ?= hostname_or_ip
+USER    = username
+MACHINE = ssh alias || ip || hostname.local
