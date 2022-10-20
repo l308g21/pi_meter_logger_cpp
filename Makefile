@@ -17,13 +17,13 @@ mkdir:
 	mkdir -p $(BLD) $(BIN)
 
 $(BLD)datalogger.o: $(SRC)datalogger.cpp $(SRC)datalogger.h $(BLD)db.o
-	$(CC) $(CFLAGS) -lpigpio -o $@ -c $<
+	$(CC) $(CFLAGS) -o $@ -c $<
 
 $(BLD)db.o: $(SRC)db.cpp $(SRC)db.h
 	$(CC) $(CFLAGS) -o $@ -c $<
 
 app: $(SRC)main.cpp $(BLD)db.o $(BLD)datalogger.o
-	$(CC) $(CFLAGS) -o $(BIN)$(TARGET) $^
+	$(CC) $(CFLAGS) -lmariadb -lpigpio -o $(BIN)$(TARGET) $^
 
 
 
