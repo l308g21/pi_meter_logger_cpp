@@ -1,6 +1,5 @@
 #pragma once
 
-
 class CDatabase;
 
 class CDatalogger
@@ -10,7 +9,7 @@ class CDatalogger
         CDatalogger();
        ~CDatalogger();
 
-       static void gpio_init();
+        static void gpio_init();
 
     public:
 
@@ -23,8 +22,12 @@ class CDatalogger
         int          get_period();
 
         void start_logging();
+    
+    public:
+        // wish i could have kept them private
+        // one way'd be to transform them to helper functions that get passed a pointer to logger instances
+        static void* logging_data( void* logger);
         void log_period();
-
 
     private:
         
@@ -33,5 +36,6 @@ class CDatalogger
         int             period;    
         int             gpio;
         unsigned int    pulse_count;
+        long unsigned int* p_logger_thread;
 
 };

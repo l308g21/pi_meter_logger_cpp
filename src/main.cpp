@@ -28,9 +28,6 @@ int main(){
     logger.set_period(10);
     logger.start_logging();
 
-    // this part is never executed - yet
-    // changes will be made
-
     //keep program running while logger runs in background
     while (true) sleep(60);
 

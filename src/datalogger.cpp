@@ -10,8 +10,9 @@
 
 
 
-// make this method a private member of CDatalogger
-void write_data(int _gpio, int _level, uint32_t _tick, void* _p_pulse_count)
+// some helper functions
+
+void increment_pulse_counter(int _gpio, int _level, uint32_t _tick, void* _p_pulse_count)
 {
     // only trigger on rising edge
     if (_level != 1) return;
@@ -22,6 +23,16 @@ void write_data(int _gpio, int _level, uint32_t _tick, void* _p_pulse_count)
     return;
 }
 
+
+void *CDatalogger::logging_data( void* logger )
+{
+    
+    while (true)
+    {
+        sleep( ((CDatalogger*) logger)->get_period() );
+        ((CDatalogger*) logger)->log_period();
+    }
+}
 
 
 
@@ -42,6 +53,7 @@ CDatalogger::CDatalogger()
     gpio   = -1;
     period = 10;
     db     = nullptr;
+    p_logger_thread = nullptr;
     return;
 }
 
@@ -49,6 +61,8 @@ CDatalogger::CDatalogger()
 CDatalogger::~CDatalogger()
 {
     db = nullptr;
+    gpioStopThread(p_logger_thread);
+    p_logger_thread = nullptr;
     return;
 }
 
@@ -122,16 +136,9 @@ void CDatalogger::start_logging()
     gpioSetMode(gpio, PI_INPUT);
     gpioSetPullUpDown(gpio, PI_PUD_DOWN);
 
-    gpioSetAlertFuncEx(gpio, write_data, &pulse_count);
+    gpioSetAlertFuncEx(gpio, increment_pulse_counter, &pulse_count);
+    p_logger_thread = gpioStartThread(logging_data, this);
 
-    // bad style --put this in seperate thread
-    while (true)
-    {
-        sleep(period);
-        log_period();
-    }
-
-    
     return;
 }
 
