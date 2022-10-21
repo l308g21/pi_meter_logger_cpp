@@ -23,8 +23,11 @@ contains data required to deploy data to pi
 
 ## build
 on remote pi run command
->make
+> make
 
 to build from remote pi while on local machine run command
->make deploy
+> make deploy
 
+## database
+expects db structure to match query
+> insert into < db >.LOGGER values (reading, reading_time, logger_id)

@@ -110,7 +110,7 @@ void CDatalogger::log_period()
     int reading = pulse_count;
     pulse_count = 0;
 
-    std::string query = "INSERT INTO SENSOR_DATA (reading, reading_time, sensor_id) VALUES (";
+    std::string query = "INSERT INTO LOGGER (reading, reading_time, logger_id) VALUES (";
     query += std::to_string(reading) + ',' 
            + reading_time + ',' 
            + std::to_string(id) + ");";
