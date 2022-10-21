@@ -11,9 +11,14 @@ int main(){
     // create db instance
     // load db config
     
-    // every 10 min 
+    // add individual instances
+    // log every 10 min
 
     // delete db instance
+
+
+    // exits if init fails
+    CDatalogger::gpio_init();
 
     CDatabase db = CDatabase();
     CDatalogger logger = CDatalogger();
@@ -21,9 +26,13 @@ int main(){
     logger.set_db(db);
     logger.set_gpio(4);
     logger.set_period(10);
-
     logger.start_logging();
 
-    // this part is never executed
+    // this part is never executed - yet
+    // changes will be made
+
+    //keep program running while logger runs in background
+    while (true) sleep(60);
+
     return 0;
 }

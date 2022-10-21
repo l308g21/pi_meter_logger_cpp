@@ -10,7 +10,7 @@
 
 
 
-
+// make this method a private member of CDatalogger
 void write_data(int _gpio, int _level, uint32_t _tick, void* _p_pulse_count)
 {
     // only trigger on rising edge
@@ -26,17 +26,29 @@ void write_data(int _gpio, int _level, uint32_t _tick, void* _p_pulse_count)
 
 
 
+
+void CDatalogger::gpio_init(){
+    if ( gpioInitialise() < 0 )
+    {            //  ^-- this seems to be a library level typo
+        std::cerr << "ERROR: gpio initialization failed" << std::endl;
+        exit(1);
+    }
+    return;
+}
+
+
 CDatalogger::CDatalogger()
 {
-    period   = 10;
-    db       = nullptr;
+    gpio   = -1;
+    period = 10;
+    db     = nullptr;
     return;
 }
 
 
 CDatalogger::~CDatalogger()
 {
-    db              = nullptr;
+    db = nullptr;
     return;
 }
 
@@ -91,9 +103,28 @@ void CDatalogger::start_logging()
     //      write current value to db
     // remember to close thread if logger determinated
     
-    if (db == nullptr) return;
+    if ( db == nullptr )
+    {
+        std::cerr << "ERROR: logger.database not set" << std::endl;
+        exit(1);
+    }
+    if ( gpio < 0 )
+    {
+        std::cerr << "ERROR: logger.gpio not set" << std::endl;
+    }else if ( gpio < 53 )
+    {
+        std::cerr << "ERROR: logger.gpio value exceeds viable gpio range" << std::endl;
+        exit(1);
+    }
+
+    // one small notice:
+    // don't be stupid, don't use gpios already in use
+    gpioSetMode(gpio, PI_INPUT);
+    gpioSetPullUpDown(gpio, PI_PUD_DOWN);
+
     gpioSetAlertFuncEx(gpio, write_data, &pulse_count);
 
+    // bad style --put this in seperate thread
     while (true)
     {
         sleep(period);

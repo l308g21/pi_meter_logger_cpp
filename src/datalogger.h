@@ -10,6 +10,8 @@ class CDatalogger
         CDatalogger();
        ~CDatalogger();
 
+       static void gpio_init();
+
     public:
 
         void set_db( CDatabase& _db);
