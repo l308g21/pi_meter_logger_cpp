@@ -125,9 +125,9 @@ void CDatalogger::start_logging()
     if ( gpio < 0 )
     {
         std::cerr << "ERROR: logger.gpio not set" << std::endl;
-    }else if ( gpio < 53 )
+    }else if ( gpio > 53 )
     {
-        std::cerr << "ERROR: logger.gpio value exceeds viable gpio range" << std::endl;
+        std::cerr << "ERROR: logger.gpio value exceeds viable gpio range: " << gpio << " < 53" << std::endl;
         exit(1);
     }
 

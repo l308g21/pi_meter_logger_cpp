@@ -39,11 +39,11 @@ void CDatabase::load_config(const char* _config_file)
     // save line[1] to matched variable
 
     std::ifstream config_file;
-    config_file.open("../config/db.config");
+    config_file.open( _config_file, std::ios_base::in );
 
     if ( ! config_file.is_open() )
     {
-        std::cerr << "file failed to open" << std::endl;
+        std::cerr << "ERROR: failed to open file at location: " << _config_file << std::endl;
         exit(1);
     }
 
@@ -72,11 +72,12 @@ void CDatabase::load_config(const char* _config_file)
         }
     }
 
-    std::cout << "hostname: " << hostname << std::endl;
-    std::cout << "database: " << database << std::endl;
-    std::cout << "username: " << username << std::endl;
-    std::cout << "password: " << password << std::endl;
-    std::cout << "port:     " << port     << std::endl;
+    // verify config file read correctly
+    // std::cout << "hostname: " << hostname << std::endl;
+    // std::cout << "database: " << database << std::endl;
+    // std::cout << "username: " << username << std::endl;
+    // std::cout << "password: " << password << std::endl;
+    // std::cout << "port:     " << port     << std::endl;
 
 
     return;

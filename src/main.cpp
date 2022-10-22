@@ -22,11 +22,18 @@ int main(){
 
     CDatabase db = CDatabase();
     CDatalogger logger = CDatalogger();
+
+    // run program from project root directory
+    // or modify following line
+    db.load_config("config/db.conf");
     
     logger.set_db(db);
     logger.set_gpio(4);
     logger.set_period(10);
     logger.start_logging();
+
+    // add another logger here
+
 
     //keep program running while logger runs in background
     while (true) sleep(60);
