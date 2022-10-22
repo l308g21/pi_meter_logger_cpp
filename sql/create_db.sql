@@ -1,0 +1,32 @@
+CREATE DATABASE SOME_DB IF NOT EXISTS;
+USE SOME_DB;
+
+
+-- DROP TABLE  IF EXISTS LOGGER_PERIODS;
+CREATE TABLE IF NOT EXISTS LOGGER_PERIODS
+(
+    period_id       INTEGER     NOT NULL    PRIMARY KEY     AUTO_INCREMENT
+    ,duration       INTEGER     NOT NULL    
+    ,since          DATETIME    NOT NULL    DEFAULT NOW()
+    ,logger_id      INTEGER     NOT NULL
+);
+
+
+-- DROP TABLE IF EXISTS LOGGER;
+CREATE TABLE IF NOT EXISTS LOGGER_DATA
+(
+     reading_id     INTEGER     NOT NULL    PRIMARY KEY     AUTO_INCREMENT
+    ,reading        INTEGER     NOT NULL
+    ,reading_time   DATETIME    NOT NULL    DEFAULT NOW()
+    ,logger_id      INTEGER     NOT NULL
+);
+
+
+--DROP TABLE IF EXISTS SENSOR
+CREATE TABLE IF NOT EXISTS SENSOR
+(
+    sensor_id       INTEGER     NOT NULL    PRIMARY KEY     AUTO_INCREMENT
+    ,sensor_name    VARCHAR(50) NOT NULL
+    ,since          DATETIME    NULL
+    ,logger_scale   INTEGER     NULL
+);

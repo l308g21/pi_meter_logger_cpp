@@ -27,13 +27,18 @@ int main(){
     // or modify following line
     db.load_config("config/db.conf");
     
+    // adjust values to fit your setup
+    logger.set_id(2)
     logger.set_db(db);
     logger.set_gpio(4);
     logger.set_period(10);
     logger.start_logging();
 
     // add another logger here
-
+    // this might be a rather inconvenient idea
+    // creating a deamon seems like a much better solution
+    //      deamon + some way to add logger instance to daemon
+    // fix that later
 
     //keep program running while logger runs in background
     while (true) sleep(60);
