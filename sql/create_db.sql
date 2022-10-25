@@ -30,3 +30,12 @@ CREATE TABLE IF NOT EXISTS SENSOR
     ,since          DATETIME    NULL
     ,logger_scale   INTEGER     NULL
 );
+
+
+ALTER TABLE LOGGER_PERIODS
+    ADD CONSTRAINT fk_logger_periods_sensor FOREIGN KEY (logger_id) REFERENCES SENSOR (sensor_id)
+;
+
+ALTER TABLE LOGGER_DATA
+    ADD CONSTRAINT fk_logger_data_sensor FOREIGN KEY (logger_id) REFERENCES SENSOR (sensor_id)
+;

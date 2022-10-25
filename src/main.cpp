@@ -28,7 +28,7 @@ int main(){
     db.load_config("config/db.conf");
     
     // adjust values to fit your setup
-    logger.set_id(2)
+    logger.set_id(2);
     logger.set_db(db);
     logger.set_gpio(4);
     logger.set_period(10);
