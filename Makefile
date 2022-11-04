@@ -23,7 +23,7 @@ $(BLD)db.o: $(SRC)db.cpp $(SRC)db.h
 	$(CC) $(CFLAGS) -o $@ -c $<
 
 app: $(SRC)main.cpp $(BLD)db.o $(BLD)datalogger.o
-	$(CC) $(CFLAGS) -lmariadb -lpigpio -o $(BIN)$(TARGET) $^
+	$(CC) $(CFLAGS) -o $(BIN)$(TARGET) $^ -lmariadb -lpigpio
 
 
 
