@@ -1,5 +1,5 @@
-hostname: localhost
-database: some_database
-user:     mysql_user
-password: password
-port:     0
+hostname:localhost
+database:some_database
+username:mysql_user
+password:password
+port:0
