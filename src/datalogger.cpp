@@ -144,7 +144,7 @@ void CDatalogger::start_logging()
 
 void CDatalogger::log_period()
 {
-    std::string reading_time = "NULL";  // NULL defaults back to NOW() db sides
+    std::string reading_time = "NOW()";  // NULL defaults back to NOW() db sides // defaulting did not work 
     int reading = pulse_count;
     pulse_count = 0;
 
