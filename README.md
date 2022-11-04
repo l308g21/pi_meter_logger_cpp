@@ -15,10 +15,10 @@ try https://github.com/joan2937/pigpio, install via command
 
 ### create config files
 
-* from *db.config.template* create **db.config**
+* from *db.conf.template* create **db.conf**
 contains data required to connect to database
 
-* from *deploy.config.template* create **deploy.config**
+* from *deploy.conf.template* create **deploy.conf**
 contains data required to deploy data to pi
 
 ## build
