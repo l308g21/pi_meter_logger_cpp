@@ -1,2 +1,2 @@
-USER    = username
-MACHINE = ssh alias || ip || hostname.local
+REMOTE_USER = username
+MACHINE     = ssh alias || ip || hostname.local

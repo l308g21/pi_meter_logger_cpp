@@ -29,7 +29,7 @@ app: $(SRC)main.cpp $(BLD)db.o $(BLD)datalogger.o
 
 
 deploy: clean zip
-	./deploy.sh $(USER) $(MACHINE) $(TARGET) $(REMOTE_LOCATION)
+	./deploy.sh $(REMOTE_USER) $(MACHINE) $(TARGET) $(REMOTE_LOCATION)
 
 zip:
 	zip -r $(TARGET).zip .
