@@ -88,3 +88,13 @@ void CConfig::set_delimiter( const char _delimiter )
     delimiter = _delimiter;
     return;
 }
+
+
+std::string* CConfig::get( std::string& _parameter)
+{
+    for ( int i = 0; i < (int) v_parameters.size(); i++ )
+    {
+        if (v_parameters[i].name == _parameter) return &v_parameters[i].value;
+    }
+    return nullptr;
+}
