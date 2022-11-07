@@ -15,7 +15,7 @@ CConfig::CConfig( void )
 }
 
 
-void CConfig::load_config( std::string _config_path)
+void CConfig::load_config( std::string& _config_path)
 {
     // open file
     // exit if error while opening
@@ -79,4 +79,12 @@ void CConfig::load_config( std::string _config_path)
         v_parameters.push_back(param);
 
     }
+    return;
+}
+
+
+void CConfig::set_delimiter( const char _delimiter )
+{
+    delimiter = _delimiter;
+    return;
 }

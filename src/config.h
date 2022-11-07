@@ -12,8 +12,8 @@ struct SParameter
 class CConfig
 {
     public:
-        void load_config( std::string config_path);
-        std::string get( std::string parameter);
+        void load_config( std::string& config_path);
+        std::string get( std::string& parameter);
         void set_delimiter (const char delimiter);
  
     public:
