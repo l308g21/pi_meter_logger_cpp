@@ -1,9 +1,6 @@
 #include "tool.h"
 
 #include <algorithm>
-#include <cctype>
-#include <locale>
-
 
 
 void trim_left( std::string& _string )
