@@ -148,6 +148,8 @@ void CDatalogger::log_period()
     int reading = pulse_count;
     pulse_count = 0;
 
+    std::cout << "pulses in period: " << reading << std::endl;
+
     std::string query = "INSERT INTO LOGGER_DATA (reading, reading_time, logger_id) VALUES (";
     query += std::to_string(reading) + ',' 
            + reading_time + ',' 
